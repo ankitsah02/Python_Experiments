@@ -1,0 +1,46 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def calculate(operation):
+    try:
+        num1 = float(entry1.get())
+        num2 = float(entry2.get())
+
+        if operation == "add":
+            result = num1 + num2
+        elif operation == "sub":
+            result = num1 - num2
+        elif operation == "mul":
+            result = num1 * num2
+        elif operation == "div":
+            if num2 == 0:
+                messagebox.showerror("Error", "Cannot divide by zero")
+                return
+            result = num1 / num2
+
+        result_label.config(text=f"Result: {result}")
+
+    except ValueError:
+        messagebox.showerror("Error", "Enter valid numbers")
+
+root = tk.Tk()
+root.title("Calculator")
+root.geometry("300x250")
+
+tk.Label(root, text="First Number").pack()
+entry1 = tk.Entry(root)
+entry1.pack()
+
+tk.Label(root, text="Second Number").pack()
+entry2 = tk.Entry(root)
+entry2.pack()
+
+tk.Button(root, text="Add", command=lambda: calculate("add")).pack(pady=5)
+tk.Button(root, text="Subtract", command=lambda: calculate("sub")).pack(pady=5)
+tk.Button(root, text="Multiply", command=lambda: calculate("mul")).pack(pady=5)
+tk.Button(root, text="Divide", command=lambda: calculate("div")).pack(pady=5)
+
+result_label = tk.Label(root, text="Result:")
+result_label.pack(pady=10)
+
+root.mainloop()
